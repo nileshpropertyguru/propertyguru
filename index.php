@@ -8,20 +8,32 @@
 	$startLoop = $_GET['start'];
 	$endLoop = $_GET['end'];
 	$resultString  = "";
+	$flagMultipleThree = 0;
+	$flagMultipleFive = 0;
 
-	for ($counterValue = $startLoop; $counterValue <= $endLoop; $counterValue++) {
+	for ($counterValue = $startLoop; $counterValue < $endLoop; $counterValue++) {
 		switch ($counterValue) {
 			case (($counterValue % 3) == 0):
 				$resultString .= " Fizz";
+				$flagMultipleThree = 1;
+				$flagMultipleFive = 0;	//reset five
 				if (!($counterValue % 5) == 0) {
 					break;
 				}
 			case (($counterValue % 5) == 0):
-				$resultString .= "Buzz";
+				$resultString .= " Buzz";
+				$flagMultipleFive = 1;
+				if (($flagMultipleThree == 1) && ($flagMultipleFive == 1)) {
+					$resultString .= " Bazzî";
+				}
+				$flagMultipleThree = 0;
 				break;
 			default:
 				$resultString .= " " . $counterValue;
-				break;
+				//reset both flags
+				$flagMultipleThree = 0;
+				$flagMultipleFive = 0;
+				break;	
 		}
 	}
 	echo $resultString;
