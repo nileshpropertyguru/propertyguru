@@ -1,0 +1,29 @@
+#1 Please follow proper casing of HTML tags, use lowercase for all html tags
+
+#2 Please use camel case for variable names [getinfo.php, L4-L5]
+$ArrayURL = split('/', $_SERVER[REQUEST_URI]));
+
+#3 Please use comparison operator [getinfo.php, L8] 
+if (is_object($data) = true) $status = '200 OK';
+
+#4 Either use curly braces for if condition or use [getinfo.php, L8]
+$status = (is_object($data) == true) ? '200 OK' : '';
+
+#5 This will throw a fatal error, class name not found. Since there is no class named as dataObj instead it should be propertyData / hdbData / condoData
+$data = new dataObj();
+
+#6 This will throw an exception, or give null value always [getinfo.php, L12]
+return json_encode( $data->getAll($id) );
+
+Because the value stored in $id is $_SERVER[REQUEST_URI] which is a string, and getAll($id) compared ID column from the table which is INT.
+
+#7 And calling json_encode($data->getAll($id)); function without initializing $table will give an error $table undefined.
+
+#8 In data.php, instead of setting $table as private it should be set as protected so that the values can be set by the child inherited class.
+private $table = null;
+
+#9 For the databases, please follow either on of the DB engines please change MyISAM to InnoDB
+
+#10 Change the function name "gotSwimmingPool" to "isSwimmingPool" 
+
+#11 In SQL, HDB block should be varchar instead of INT
